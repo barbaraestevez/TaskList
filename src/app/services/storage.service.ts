@@ -5,6 +5,7 @@ import { Tarea } from '../models/tarea';
   providedIn: 'root'
 })
 export class StorageService {
+  listaTarea: Tarea[] = [];
 
   constructor() { }
 
@@ -15,9 +16,13 @@ export class StorageService {
   }
 
   //Método con el que almacenamos los datos obtenidos
-  saveData(tarea:Tarea):void{ //se pone Tarea en vez de string porque...
-    const tareas = this.getData(); //En la constante tareas se va a almacenar los datos incluidos en getData
-    tareas.push(tarea); // tareas es un array al que se le van a ir añadiendo los datos
+  saveData(tareas:Tarea[],tarea?:Tarea):void{ //se pone Tarea en vez de string porque...
+    //const tareas = this.getData(); //En la constante tareas se va a almacenar los datos incluidos en getData
+    //tareas.push(tarea); // tareas es un array al que se le van a ir añadiendo los datos
+    if(tarea) tareas.push(tarea);
     localStorage.setItem('tareas',JSON.stringify(tareas));
+  }
+  eliminarTodos():void{
+    this.listaTarea = [];
   }
 }

@@ -1,6 +1,36 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
+            <input type="text" [(ngModel)]="nombreTarea" class="form-control form-control-lg"
+            placeholder="Ingrese la tarea..." (keyup.enter)="agregarTarea()">
+        </div>
+        <div class="col-lg-6 offset-lg-3 mt-3">
+            <div class="card p-3" *ngIf="listaTarea.length===0">
+                <h6 class="text-danger">No hay tareas para mostrar</h6>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between" 
+                *ngFor="let tarea of listaTarea;let i=index">
+                    <span class="cursor" (click)="modificarTarea(i)">
+                        <i class="text-success fa-regular" 
+                        [ngClass]="!tarea['_estado']?'fa-circle':'fa-circle-check'" ></i>
+                    </span>
+                    <span class="cursor" (click)="editarTarea(i)">
+                    {{tarea['_nombre']}}
+                    </span>
+                    <span class="icono cursor" (click)="eliminarTarea(i)">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </span>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
             <input type="text" [(ngModel)]="nombreTarea" class="form-control form-control-lg" placeholder="Añade una tarea..." (keyup.enter)="agregarTarea()">
         </div>
         <div class="col-lg-6 offset-lg-3 mt-3">
@@ -8,11 +38,17 @@
                 <h6 class="text-danger">No hay tareas para mostrar</h6>
             </div>
             <ul class="list-group">
-                <li class="list-group-item" *ngFor="let tarea of listaTarea">
+                <li class="list-group-item d-flex justify-content-between" *ngFor="let tarea of listaTarea; let i = index">
+                    <span class="cursor" (click)="modificarTarea(i)">
+                        <i class="text-success fa-regular" [ngClass]="tarea['_estado']?' fa-circle-check':' fa-regular fa-circle'"></i>
+                    </span>-->
                     <!-- {{tarea.nombre}} -> esto no nos vale porque hemos puesto guión bajo en los campos de la clase _nombre-->
-                    {{tarea['_nombre']}}<i class="bi bi-plus-circle-fill"></i>
+                    <!-- {{tarea['_nombre']}}
+                    <span class="text-danger cursor" (click)="eliminarTarea(i)">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </span>
                 </li>
             </ul>
         </div>
     </div>
-</div>
+</div> -->
